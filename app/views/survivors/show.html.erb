@@ -1,4 +1,4 @@
-<h2>Survivor</h2>
+<h1>Survivor</h1>
 
 <p>
   <strong>Name:</strong>
@@ -25,10 +25,19 @@
   <%= @survivor.longitude %>
 </p>
 
-<p>
-  <strong>Infected:</strong>
+<%= link_to 'Update Location', edit_survivor_path(@survivor) %><br>
+
+<% if @survivor.infected == true %>
+<p style='color:red;'>
+  <strong> Infected: </strong>
   <%= @survivor.infected %>
 </p>
+<% else %>
+<p>
+  <strong> Infected:  </strong>
+  <%= @survivor.infected %>
+</p>
+<% end %>
 
 <h2>Inventory</h2>
 
@@ -52,5 +61,46 @@
   <%= @survivor.ammunition %>
 </p>
 
-<%= link_to 'Edit Location', edit_survivor_path(@survivor) %><br>
+<br><br>
+<h2><%= @survivor.flags.size == 0 ? ' ' : 'This survivor was reported as infected by:'%></h2>
+<% @survivor.flags.each do |flag| %>
+  <p>
+    <strong>Informer:</strong>
+    <%= flag.informer %>
+  </p>
+<% end %>
+
+<br><br>
+<h3>Report this survivor as infected:</h3>
+  <%= form_for([@survivor, @survivor.flags.build]) do |f| %>
+   
+<!--     <% if @survivor.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@survivor.errors.count, "error") %> prohibited
+        this survivor from being saved:
+      </h2>
+      <ul>
+        <% @survivor.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %> -->
+
+  <p>
+    <%= f.label :informer %><br>
+    <%= f.text_field :informer %>
+  </p>
+
+  <p hidden>
+    <%= f.label :infected %><br>
+    <%= f.text_field :infected, :value => @survivor.name %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+<br><br>
+
 <%= link_to 'Back', survivors_path %>

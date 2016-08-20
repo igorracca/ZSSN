@@ -1,71 +1,93 @@
 <h1>Reports</h1>
 
 <ul>
-	<li>
-		<% @infectedSurvivors = 0 
-		 @survivors.each do |survivor| 
-			if survivor.infected == true 
-				@infectedSurvivors += 1 
-			end 
-		 end %>
 
+	<% # percentage of infected and non-infected survivors
+		@nonInfectedSurvivors = 0 
+		# no survivors
+		if @survivors.size == 0
+			@infectedSurvivors = 0
+		else
+			# count infected survivos
+			@survivors.each do |survivor| 
+				 if survivor.infected == false 
+						@nonInfectedSurvivors += 1 
+				 end 
+			end 
+			# calculate the percentage of infected and non-infected survivors avoiding the division by zero
+			@nonInfectedSurvivors == 0 ? 0 : @nonInfectedSurvivors = 100.0/(@survivors.size/@nonInfectedSurvivors)
+			@infectedSurvivors = 100.0 - @nonInfectedSurvivors
+		end
+	%>
+	<li>
 		<p>
-		  <strong>Infected Survivors:</strong>
-		  <%= if @infectedSurvivors != 0 
-		  			@infectedSurvivors = @survivors.size/@infectedSurvivors * 100
-		  		end
-		  	@infectedSurvivors
-		  %> %
+	  		<strong>Infected Survivors:</strong>
+	  		<%= number_with_precision(@infectedSurvivors, :precision => 2) %> %
 		</p>
 	</li> 
 
-
-		<li>
-		<% @infectedSurvivors = 0 
-		 @survivors.each do |survivor| 
-			 if survivor.infected == false 
-					@infectedSurvivors += 1 
-			 end 
-		end %>
-
+	<li>
 		<p>
 		  <strong>Non-infected Survivors:</strong>
-		  <%= if @infectedSurvivors != 0 
-		  			@infectedSurvivors = @survivors.size/@infectedSurvivors * 100
-		  		end
-		  	@infectedSurvivors
-		  %> %
+		  <%= number_with_precision(@nonInfectedSurvivors, :precision => 2) %> %
 		</p>
 	</li> 
 
 	<li>
-		<% @water = 0 
-			@food = 0
-			@medication = 0
-			@ammunition = 0
+	<% # get the average amount of each kind of resource by survivor
+		@water = 0 
+		@food = 0
+		@medication = 0
+		@ammunition = 0
 		
-		@survivors.each do |survivor|
-			@water += survivor.water 
-			@food += survivor.food
-			@medication += survivor.medication
-			@ammunition += survivor.ammunition
-		 end %>
+		if @survivors.size != 0
+			@survivors.each do |survivor|
+				@water += survivor.water 
+				@food += survivor.food
+				@medication += survivor.medication
+				@ammunition += survivor.ammunition
+			 end 
+
+			@water = @water/@survivors.size
+		  	@food = @food/@survivors.size
+		  	@medication = @medication/@survivors.size
+		  	@ammunition = @ammunition/@survivors.size
+		end
+	 %>
 
 		<p>
 		  <strong>Average amount of each kind of resource by survivor:</strong>
 		  <ul>
-		  	<li> Water: <%= @water/@survivors.size %></li>
-		  	<li> Food: <%= @food/@survivors.size %></li>
-		  	<li> Medication: <%= @medication/@survivors.size %></li>
-		  	<li> Ammunition: <%= @ammunition/@survivors.size %></li>
+		  	<li> Water: <%= @water %></li>
+		  	<li> Food: <%= @food %></li>
+		  	<li> Medication: <%= @medication %></li>
+		  	<li> Ammunition: <%= @ammunition %></li>
 		  </ul>
 		  
 		</p>
 	</li> 
 
 
-	<li>Points lost because of infected survivor.</li>
+	<li>
+	<% @pointsLost = 0 
+		 @survivors.each do |survivor| 
+			 if survivor.infected == true 
+			 	# calculate the points based on the given table
+				@pointsLost += survivor.water * 4
+				@pointsLost += survivor.food * 3
+				@pointsLost += survivor.medication * 2
+				@pointsLost += survivor.ammunition * 1
+			 end 
+		end %>
+
+		<p>
+		  <strong>Points lost because of infected survivors:</strong>
+		  <%= @pointsLost
+		  %> 
+		</p>
+	</li> 
+
 </ul>
 
-<br><br>
+<br>
 <%= link_to 'Back', root_path %>

@@ -23,13 +23,18 @@
       <td><%= survivor.gender %></td>
       <td><%= survivor.latitude %></td>
       <td><%= survivor.longitude %></td>
-      <td><%= survivor.infected %></td>
+      
+      <% if survivor.infected == true %>
+        <td style='color:red;'><%= survivor.infected %></td>
+      <% else %>
+        <td ><%= survivor.infected %></td>
+      <% end %>
+      
       <td><%= survivor.water %></td>
       <td><%= survivor.food %></td>
       <td><%= survivor.medication %></td>
       <td><%= survivor.ammunition %></td>
       <td><%= link_to 'Show', survivor_path(survivor) %></td>
-      <td><%= link_to 'Edit Location', edit_survivor_path(survivor) %></td>
     </tr>
   <% end %>
 </table>

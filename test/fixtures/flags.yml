@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  informer: MyString
+  survivor_id: 
+
+two:
+  informer: MyString
+  survivor_id: 

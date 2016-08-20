@@ -1,6 +1,7 @@
 class SurvivorsController < ApplicationController
 	def index
    		@survivors = Survivor.all
+   		@survivor = Survivor.new
  	end
 
 	def show

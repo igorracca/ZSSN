@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160820043934) do
+ActiveRecord::Schema.define(version: 20160820190241) do
+
+  create_table "flags", force: :cascade do |t|
+    t.string   "informer"
+    t.string   "infected"
+    t.integer  "survivor_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "flags", ["survivor_id"], name: "index_flags_on_survivor_id"
 
   create_table "survivors", force: :cascade do |t|
     t.string   "name"
