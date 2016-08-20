@@ -1,0 +1,73 @@
+<h1>New Survivor</h1>
+
+<%= form_for :survivor, url: survivors_path do |f| %>
+  
+  <% if @survivor.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@survivor.errors.count, "error") %> prohibited
+        this survivor from being saved:
+      </h2>
+      <ul>
+        <% @survivor.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<h2>Survivor</h2>
+
+    <p>
+      <%= f.label :name %><br>
+      <%= f.text_area :name %>
+    </p>
+   
+    <p>
+      <%= f.label :age %><br>
+      <%= f.text_field :age %>
+    </p>
+
+    <p>
+      <%= f.label :gender %><br>
+      <%= f.text_field :gender %>
+    </p>
+
+    <p>
+      <%= f.label :latitude %><br>
+      <%= f.text_field :latitude %>
+    </p>
+
+    <p>
+      <%= f.label :longitude %><br>
+      <%= f.text_field :longitude %>
+    </p>
+
+  <h2>Inventory</h2>
+ 
+    <p>
+      <%= f.label :water %><br>
+      <%= f.number_field :water, :value => 0 %>
+    </p>
+   
+    <p>
+      <%= f.label :food %><br>
+      <%= f.number_field :food, :value => 0 %>
+    </p>
+
+    <p>
+      <%= f.label :medication %><br>
+      <%= f.number_field :medication, :value => 0 %>
+    </p>
+
+    <p>
+      <%= f.label :ammunition %><br>
+      <%= f.number_field :ammunition, :value => 0 %>
+    </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', survivors_path %>

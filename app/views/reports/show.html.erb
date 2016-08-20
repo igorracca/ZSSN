@@ -1,0 +1,17 @@
+<h1>Percentage of infected survivors.</h1>
+
+<% @infectedSurvivors = 0 %>
+<% @survivors.each do |survivor| %>
+	<% if survivor.infected == true %>
+		<%	@infectedSurvivors += 1 %>
+	<% end %>
+<% end %>
+
+<p>
+  <strong>Infected Survivors:</strong>
+  <%= if @infectedSurvivors != 0 
+  			@infectedSurvivors = @survivors.size/@infectedSurvivors
+  		end
+  	@infectedSurvivors
+  %> %
+</p>

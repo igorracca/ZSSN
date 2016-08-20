@@ -1,0 +1,71 @@
+<h1>Reports</h1>
+
+<ul>
+	<li>
+		<% @infectedSurvivors = 0 
+		 @survivors.each do |survivor| 
+			if survivor.infected == true 
+				@infectedSurvivors += 1 
+			end 
+		 end %>
+
+		<p>
+		  <strong>Infected Survivors:</strong>
+		  <%= if @infectedSurvivors != 0 
+		  			@infectedSurvivors = @survivors.size/@infectedSurvivors * 100
+		  		end
+		  	@infectedSurvivors
+		  %> %
+		</p>
+	</li> 
+
+
+		<li>
+		<% @infectedSurvivors = 0 
+		 @survivors.each do |survivor| 
+			 if survivor.infected == false 
+					@infectedSurvivors += 1 
+			 end 
+		end %>
+
+		<p>
+		  <strong>Non-infected Survivors:</strong>
+		  <%= if @infectedSurvivors != 0 
+		  			@infectedSurvivors = @survivors.size/@infectedSurvivors * 100
+		  		end
+		  	@infectedSurvivors
+		  %> %
+		</p>
+	</li> 
+
+	<li>
+		<% @water = 0 
+			@food = 0
+			@medication = 0
+			@ammunition = 0
+		
+		@survivors.each do |survivor|
+			@water += survivor.water 
+			@food += survivor.food
+			@medication += survivor.medication
+			@ammunition += survivor.ammunition
+		 end %>
+
+		<p>
+		  <strong>Average amount of each kind of resource by survivor:</strong>
+		  <ul>
+		  	<li> Water: <%= @water/@survivors.size %></li>
+		  	<li> Food: <%= @food/@survivors.size %></li>
+		  	<li> Medication: <%= @medication/@survivors.size %></li>
+		  	<li> Ammunition: <%= @ammunition/@survivors.size %></li>
+		  </ul>
+		  
+		</p>
+	</li> 
+
+
+	<li>Points lost because of infected survivor.</li>
+</ul>
+
+<br><br>
+<%= link_to 'Back', root_path %>

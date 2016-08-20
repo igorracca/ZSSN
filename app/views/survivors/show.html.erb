@@ -1,0 +1,56 @@
+<h2>Survivor</h2>
+
+<p>
+  <strong>Name:</strong>
+  <%= @survivor.name %>
+</p>
+
+<p>
+  <strong>Age:</strong>
+  <%= @survivor.age %>
+</p>
+
+<p>
+  <strong>Gender:</strong>
+  <%= @survivor.gender %>
+</p>
+
+<p>
+  <strong>Latitude:</strong>
+  <%= @survivor.latitude %>
+</p>
+
+<p>
+  <strong>Longitude:</strong>
+  <%= @survivor.longitude %>
+</p>
+
+<p>
+  <strong>Infected:</strong>
+  <%= @survivor.infected %>
+</p>
+
+<h2>Inventory</h2>
+
+<p>
+  <strong>Water:</strong>
+  <%= @survivor.water %>
+</p>
+
+<p>
+  <strong>Food:</strong>
+  <%= @survivor.food %>
+</p>
+
+<p>
+  <strong>Medication:</strong>
+  <%= @survivor.medication %>
+</p>
+
+<p>
+  <strong>Ammunition:</strong>
+  <%= @survivor.ammunition %>
+</p>
+
+<%= link_to 'Edit Location', edit_survivor_path(@survivor) %><br>
+<%= link_to 'Back', survivors_path %>
