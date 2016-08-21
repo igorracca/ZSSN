@@ -14,7 +14,7 @@ class FlagsController < ApplicationController
  
   private
     def flag_params
-      params.require(:flag).permit(:informer)
+      params.require(:flag).permit(:informer, :infected)
     end
 
 end

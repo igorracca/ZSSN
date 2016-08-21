@@ -17,7 +17,7 @@ class SurvivorsController < ApplicationController
  	end
 
 	def create
-	  	@survivor = Survivor.new(survivor_params)
+	  	@survivor = Survivor.new(new_survivor_params)
 	 
 	 	if @survivor.save
 	  		redirect_to @survivor
@@ -37,10 +37,13 @@ class SurvivorsController < ApplicationController
 	end
 
 	private
-		def survivor_params
+		def new_survivor_params
 			params[:survivor][:infected] = false
 			params.require(:survivor).permit(:name, :age, :gender, :latitude, :longitude, :water, :food, :medication, :ammunition, :infected)
 		end
 
-	
+		private
+		def survivor_params
+			params.require(:survivor).permit(:name, :age, :gender, :latitude, :longitude, :water, :food, :medication, :ammunition, :infected)
+		end
 end
