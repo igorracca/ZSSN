@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160820190241) do
+ActiveRecord::Schema.define(version: 20160821215608) do
 
   create_table "flags", force: :cascade do |t|
     t.string   "informer"
@@ -37,5 +37,23 @@ ActiveRecord::Schema.define(version: 20160820190241) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "trades", force: :cascade do |t|
+    t.integer  "id1"
+    t.integer  "w1"
+    t.integer  "f1"
+    t.integer  "m1"
+    t.integer  "a1"
+    t.integer  "id2"
+    t.integer  "w2"
+    t.integer  "f2"
+    t.integer  "m2"
+    t.integer  "a2"
+    t.integer  "survivor_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "trades", ["survivor_id"], name: "index_trades_on_survivor_id"
 
 end

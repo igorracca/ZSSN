@@ -39,28 +39,6 @@
 </p>
 <% end %>
 
-<h2>Inventory</h2>
-
-<p>
-  <strong>Water:</strong>
-  <%= @survivor.water %>
-</p>
-
-<p>
-  <strong>Food:</strong>
-  <%= @survivor.food %>
-</p>
-
-<p>
-  <strong>Medication:</strong>
-  <%= @survivor.medication %>
-</p>
-
-<p>
-  <strong>Ammunition:</strong>
-  <%= @survivor.ammunition %>
-</p>
-
 <br><br>
 <h2><%= @survivor.flags.size == 0 ? ' ' : 'This survivor was reported as infected by:'%></h2>
 <% @survivor.flags.each do |flag| %>
@@ -71,7 +49,7 @@
 <% end %>
 
 <br><br>
-<h3>Report this survivor as infected:</h3>
+<h2>Report this survivor as infected:</h2>
   <%= form_for([@survivor, @survivor.flags.build]) do |f| %>
    
 <!--     <% if @survivor.errors.any? %>
@@ -102,5 +80,73 @@
   </p>
 <% end %>
 <br><br>
+
+<br>
+<h1>Trade with this survivor</h1>
+Both sides of the trade should offer the same amount of points.  
+
+<%= form_for([@survivor, @survivor.trades.build]) do |f| %>
+  <!-- trader 1 -->
+  <p hidden>
+    <%= f.label :id1 %><br>
+    <%= f.text_field :id1, :value => @survivor.id, :readonly => true %>
+  </p>
+  <p>
+    <strong>Name:</strong>
+    <%= @survivor.name %><br>
+  </p>
+  <h4> Inventory </h4>
+  <p>
+    Water:<br>
+    <%= f.number_field :w1, min: 0, max:@survivor.water, :value => @survivor.water %> 4 points ea.
+  </p>
+  <p>
+    Food:<br>
+    <%= f.number_field :f1, min: 0, max:@survivor.food, :value => @survivor.food %> 3 points ea.
+  </p>
+  <p>
+    Medication:<br>
+    <%= f.number_field :m1, min: 0, max:@survivor.medication, :value => @survivor.medication %> 2 points ea.
+  </p>
+  <p>
+    Ammunition:<br>
+    <%= f.number_field :a1, min: 0, max:@survivor.ammunition, :value => @survivor.ammunition %> 1 points ea.
+  </p>
+
+  <br>
+  <!-- trader 2 -->
+  <p>
+    <strong>Who are you?:</strong>
+    <%= f.collection_select :id2, @survivors, :id, :name, include_blank: false %>
+  </p>
+
+  <h4> Inventory </h4>
+  <p>
+    Water:<br> 
+    <%= f.number_field :w2, min: 0, :value => 0 %> 4 points ea.
+  </p>
+  <p>
+    Food:<br>
+    <%= f.number_field :f2, min: 0, :value => 0 %> 3 points ea.
+  </p>
+  <p>
+    Medication:<br>
+    <%= f.number_field :m2, min: 0, :value => 0 %> 2 points ea.
+  </p>
+  <p>
+    Ammunition:<br>
+    <%= f.number_field :a2, min: 0, :value => 0 %> 1 points ea.
+  </p>
+
+  <% if @survivor.infected == true %>
+    <p style='color:red'>
+      <strong>INFECTED SURVIVORS CANNOT TRADE!</strong>
+    </p>
+  <% else %>
+    <p>
+      <%= f.submit %>
+    </p>
+  <% end %>
+<% end %>
 
 <%= link_to 'Back', survivors_path %>

@@ -1,5 +1,6 @@
 class Survivor < ActiveRecord::Base
 	has_many :flags
+	has_many :trades
 
   	validates :name, presence: true, uniqueness: true
   	validates :latitude, :longitude, presence: true
