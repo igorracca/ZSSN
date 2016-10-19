@@ -6,12 +6,15 @@
 
 First make sure that you have installed: 
 
-1.  [Ruby] (http://rubyinstaller.org/downloads/) to check your version  `ruby -v` 
-2.  [Rails] (http://railsinstaller.org/) or use the gem install command `gem install rails` to check your version `rails --version`
-3.  [SQLite3] (https://www.sqlite.org/) to check your version  `sqlite3 --version` 
+1.  [Ruby] (http://rubyinstaller.org/downloads/) <br> to check your version:  `ruby -v` 
+2.  [Rails] (http://railsinstaller.org/) or use the gem install command `gem install rails` <br> to check your version: `rails --version`
+3.  [SQLite3] (https://www.sqlite.org/) <br> to check your version:  `sqlite3 --version` 
 
 Go to ZSSN directory and run the server: 
 > `rails server`
+
+Open a browser window and go to:
+> http://localhost:3000
 
 To resolve Migrations issue, run: 
 > `bin/rake db:migrate`
