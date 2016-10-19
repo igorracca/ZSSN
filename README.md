@@ -1,4 +1,24 @@
-# ZSSN
+# ZSSN (Zombie Survival Social Network)
+
+-----------
+
+## Installation 
+
+First make sure that you have installed: 
+
+1.  [Ruby] (http://rubyinstaller.org/downloads/) to check your version  `ruby -v` 
+2.  [Rails] (http://railsinstaller.org/) or use the gem install command `gem install rails` to check your version `rails --version`
+3.  [SQLite3] (https://www.sqlite.org/) to check your version  `sqlite3 --version` 
+
+Go to ZSSN directory and run the server: 
+> `rails server`
+
+To resolve Migrations issue, run: 
+> `bin/rake db:migrate`
+
+-----------
+
+## Problem Description
 
 The world as we know it has fallen into an apocalyptic scenario. A laboratory-made virus is transforming human beings and animals into zombies, hungry for fresh flesh. You, as a zombie resistance member (and the last survivor who knows how to code), was designated to develop a system to share resources between non-infected humans.
 
@@ -6,17 +26,17 @@ You, as a zombie resistance member (and the last survivor who knows how to code)
 
 ## Requirements
 
-- Add survivors to the database
+- **Add survivors to the database**
 
 A survivor must have a name, age, gender and last location (latitude, longitude).
 
 A survivor also has an inventory of resources of their own property (which you need to declare when upon the registration of the survivor).
 
-- Update survivor location
+- **Update survivor location**
 
 A survivor must have the ability to update their last location, storing the new latitude/longitude pair in the base (no need to track locations, just replacing the previous one is enough).
 
-- Flag survivor as infected
+- **Flag survivor as infected**
 
 In a chaotic situation like that, it's inevitable that a survivor may get contaminated by the virus. When this happens, we need to flag the survivor as infected.
 
@@ -26,13 +46,13 @@ A survivor is marked as infected when at least three other survivors report thei
 
 When a survivor is infected, their inventory items become inaccessible (they cannot trade with others).
 
-- Survivors cannot Add/Remove items from inventory
+- **Survivors cannot Add/Remove items from inventory**
 
 Their belongings must be declared when they are first registered in the system. After that they can only change their inventory by means of trading with other survivors.
 
 The items allowed in the inventory are described above in the first feature.
 
-- Trade items:
+- **Trade items:**
 
 Survivors can trade items among themselves.
 
@@ -49,7 +69,7 @@ The trades themselves need not to be stored, but the items must be transferred f
 |Medication | 2       | 
 | Ammunition | 1      | 
 
-- Reports
+- **Reports**
 
 The API must offer the following reports:
 
@@ -58,7 +78,3 @@ The API must offer the following reports:
 3. Average amount of each kind of resource by survivor (e.g. 5 waters per user)
 4. Points lost because of infected survivor.
 
-```
-To resolve Migrations issue, run: 
- >  bin/rake db:migrate
-```
