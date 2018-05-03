@@ -74,7 +74,7 @@ The trades themselves need not to be stored, but the items must be transferred f
 
 - **Reports**
 
-The API must offer the following reports:
+The application must offer the following reports:
 
 1. Percentage of infected survivors.
 2. Percentage of non-infected survivors.
